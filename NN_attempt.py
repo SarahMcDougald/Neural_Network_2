@@ -1,12 +1,28 @@
 
 ###
+
+"""
+# PROJECT GOALS: 
+1) Create a neural network in Python, using the Pandas and Numpy libraries, that is capable of learning a basic y=x^2 pattern accurately (over 95%).
+2) Create a NN that can predict the price of a house in Beaverton, given two relevant variables, within 10% of the actual value. 
+
+Inspiration for project: tutorial by "Data Boys Learning" at https://databoys.github.io/Feedforward/
+What separates this project from the tutorial:
+- use of matplotlib.pyplot functions to visualize the housing data
+- use of pandas functions to load and prepare data for machine learning processes
+- two different applications of the neural network: a linear equation, and house prices
+- **a different activation function: LeakyRELU (and its derivative) used here instead of the sigmoid function. 
+
+- FUTURE GOAL: expand to having constructors for four-layers, etc...
+
+"""
+
+###
 # Note: all data is from Beaverton houses, using the website Zillow.com. Data was retrieved from the following URL:
 # https://www.zillow.com/homes/for_sale/Beaverton-OR/pmf,pf_pt/house,mobile_type/30381_rid/1-_beds/1-_baths/50000-1000000_price/182-3647_mp/pricea_sort/45.563823,-122.675229,45.405199,-122.970486_rect/11_zm/
 # 
 # Project started 09/03/2017
 # 
-
-
 # There are three strategies for loading data: vanilla Python, NumPy, and Pandas. Source: https://machinelearningmastery.com/load-machine-learning-data-python/
 
 ###
@@ -102,7 +118,7 @@ class Neural_Network(object):
         # Declare class variables.
 
         # Total numbers of nodes in each layer, for keeping track.
-        self.inputs_numNodes = numInputs + 1 # for a "bias node"
+        self.inputs_numNodes = numInputs #Optional bias node.
         self.hidden_numNodes = numHiddens
         self.outputs_numNodes = numOutputs
 
@@ -117,17 +133,46 @@ class Neural_Network(object):
         # TODO: fill in each layer with the proper values.... Or, is the DataFrame for training? Call it later? --Double-check logic.--
 
         # Create the 2 sets of connections. There needs to be a list of actual weight values for each layer, and a list of weight changes for each layer.
+        # Weights are randomized to begin with.
+        # Justification for using randn(): ___*fill*___
         self.layer1_weightValues = np.random.randn(self.inputs_numNodes, self.hidden_numNodes)
         self.layer2_weightValues = np.random.randn(self.hidden_numNodes, self.outputs_numNodes)
 
         self.layer1_weightChanges = np.zeros(self.inputs_numNodes, self.hidden_numNodes)
         self.layer2_weightChanges = np.zeros(self.hidden_numNodes, self.outputs_numNodes)
 
+    def train():
+        """
+
+        A function to train the neural network.
+        """
+
+
+
     def feedForward(self, inputValues):
         """
 
-        param inputValues : ??? what the hell is this?
+        Description: Function will fill nodes with raw values, calculate the sum (of each input * connection), put this through an activation function, 
+        and do so for each hidden node. Repeat for hidden/output layer connections.
+
+        param inputValues : the values for each input node.
+
         """
+        # Step A. Process for between input and hidden layer.
+
+
+
+
+
+
+def test1_xSquared():
+    """
+    A neural network test on the equation y=x^2. NN is a 3-layer MLP with one input node, two hidden nodes, and three output nodes.
+
+    """
+    net1 = Neural_Network(1,2,1)
+
+
 
 
 

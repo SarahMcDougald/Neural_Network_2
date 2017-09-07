@@ -149,15 +149,35 @@ class Neural_Network(object):
         param inputValues : the values for each input node.
 
         """
+        # FIRST set the input raw values to the inputValues.
+        for i in (self.inputs_numNodes):
+            self.inputs_rawValues[i] = inputValues[i]
+
+        #result = 0
+
+        # Input and Hidden Layer:
+        for hNode in range(self.hidden_numNodes):
+            newVal = 0
+            for iNode in range(self.inputs_numNodes):
+                #Two ways to go about this: make a bucket, add it at the end, or just do it all in one nasty line.
+                newVal += self.inputs_rawValues[iNode] * self.layer1_weightValues[iNode][hNode]
+            self.hidden_rawValues[hNode] = leakyRELU(newVal)
         
-        result = 0
+        # Hidden and Output Layer:
+        for oNode in range(self.outputs_numNodes):
+            newVal = 0
+            for hNode in range(self.hidden_numNodes):
+                newVal += self.hidden_rawValues[hNode] * self.layer2_weightValues[hNode][oNode]
+            self.outputs_rawValues[oNode] = leakyRELU(newVal)
+        
+        # Now find the "result": basically return whatever the raw values of the output nodes are.
+        # ACTUALLY ... since they were altered by this function and are a class variable, you don't have to return them. Just access them in backPropagate().
 
-        # Step A. Process for between input and hidden layer.
+
+        #return result
 
 
-        return result
-
-    def backPropagate(self):
+    def backPropagate(self, targets):
         """
 
         Function to backpropagate.
@@ -167,7 +187,7 @@ class Neural_Network(object):
         #Should have no return. Just change the weights.
 
 
-    def train(self, inputValues, iterations, learningRate):
+    def train(self, dataPairs, iterations, learningRate):
         """
         NOTE: May want to move variable 'learningRate' to the constructor for a Neural Network, rather than this function. 
         (So that backPropagate() can use it.)
@@ -176,10 +196,13 @@ class Neural_Network(object):
         A function to train the neural network.
         """
         for cycle in range(iterations):
-            for input in range(len(inputValues[0]) ):
+            for input in range(len(dataPairs[0]) ):
                 # For each data pair, run feedforward() and backpropagate(). 
-                bucket = self.feedForward(inputValues)
-                self.backPropagate()
+                bucket = self.feedForward(dataPairs[0]) # Need to input ONLY the inputs.. not the whole 2D array of data pairs...
+                self.backPropagate(dataPairs[1])
+
+
+                # NOTE: ____ PROBLEM. This format is not generalizable to neural networks with more than one input node..... and more than one output node...
                 
 
                 

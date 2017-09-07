@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 
 
 # Careful of the file name.
-fileName = "D:\PythonProjects\Neural_Network_2_Folder\houses_sqft_and_numberOfRooms.csv"
+fileName = "D:\PythonProjects\Neural_Network_2\houses_sqft_and_numberOfRooms.csv"
 columnNames = ['sqft', 'rooms', 'price']
 data = pandas.read_csv(fileName) #data = pandas.read_csv(fileName, names=columnNames)
 
@@ -75,9 +75,8 @@ plt.show()
 
 # Create a basic set of data on which to train the network. Assume: 1 input node, 2 hidden nodes, 1 output node. x^2.
 
-xSquaredPattern = [ [1, 2, 3, 4, 5], [1, 4, 9, 16, 25] ]
-print(xSquaredPattern)
-print(xSquaredPattern[0])
+tacos = [ [1, 2, 3, 4, 5], [1, 4, 9, 16, 25] ]
+print(str(len(tacos[0]))) # Prints 5.
 
 
 
@@ -141,14 +140,6 @@ class Neural_Network(object):
         self.layer1_weightChanges = np.zeros(self.inputs_numNodes, self.hidden_numNodes)
         self.layer2_weightChanges = np.zeros(self.hidden_numNodes, self.outputs_numNodes)
 
-    def train():
-        """
-
-        A function to train the neural network.
-        """
-
-
-
     def feedForward(self, inputValues):
         """
 
@@ -158,11 +149,41 @@ class Neural_Network(object):
         param inputValues : the values for each input node.
 
         """
+        
+        result = 0
+
         # Step A. Process for between input and hidden layer.
 
 
+        return result
+
+    def backPropagate(self):
+        """
+
+        Function to backpropagate.
+
+        Parameters???
+        """
+        #Should have no return. Just change the weights.
 
 
+    def train(self, inputValues, iterations, learningRate):
+        """
+        NOTE: May want to move variable 'learningRate' to the constructor for a Neural Network, rather than this function. 
+        (So that backPropagate() can use it.)
+
+
+        A function to train the neural network.
+        """
+        for cycle in range(iterations):
+            for input in range(len(inputValues[0]) ):
+                # For each data pair, run feedforward() and backpropagate(). 
+                bucket = self.feedForward(inputValues)
+                self.backPropagate()
+                
+
+                
+                
 
 
 def test1_xSquared():
@@ -170,7 +191,14 @@ def test1_xSquared():
     A neural network test on the equation y=x^2. NN is a 3-layer MLP with one input node, two hidden nodes, and three output nodes.
 
     """
+    xSquaredPattern = [ [1, 2, 3, 4, 5], [1, 4, 9, 16, 25] ]
+    print(xSquaredPattern)
+    print(xSquaredPattern[0])
+
     net1 = Neural_Network(1,2,1)
+    net1.train(xSquaredPattern) # Add more variables to this.
+    net1.predict(7)
+
 
 
 

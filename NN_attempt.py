@@ -75,8 +75,7 @@ plt.show()
 
 # Create a basic set of data on which to train the network. Assume: 1 input node, 2 hidden nodes, 1 output node. x^2.
 
-tacos = [ [1, 2, 3, 4, 5], [1, 4, 9, 16, 25] ]
-print(str(len(tacos[0]))) # Prints 5.
+
 
 
 
@@ -87,15 +86,31 @@ def leakyRELU(value):
     param value : the numeric double that will be input into the activation function. Will be input*weight...
 
     """
+    if (value >= 0):
+        return value
+    else:
+        # Consider changing this multiplier.
+        return .01 * value
 
 
 
 def derivRL(value):
     """
-    Derivative of the activation function, Leaky RELU. Will be used in backpropagation steps. 
+    Derivative of the activation function, Leaky RELU. 
 
-    param value : the double that will be input; input*weight? or backwards equivalent.. 
+    This function will be called twice, in two backpropagation steps:
+    - when calculating the error between output layer and hidden layer
+    - when calculating the error between hidden layer and input layer
+
+    param value : ** what will be input into this? 
+    
+    BE CAREFUl.
     """
+    if value == 0:
+        return 0
+    else:
+        return 1
+
 
 
 
@@ -184,6 +199,17 @@ class Neural_Network(object):
 
         Parameters???
         """
+
+        # Calculate error between output layer and hidden layer: 
+        # -- find the error for each value in outputs_rawValues[i]
+        # -- multiply that individual error by derivLeakyRELU(outputs_rawValues[i])
+
+        for oNode in range(self.outputs_numNodes):
+            #
+
+
+
+
         #Should have no return. Just change the weights.
 
 

@@ -34,7 +34,7 @@ import pandas
 import matplotlib.pyplot as plt
 
 
-############################################################## PANDAS #################################################
+############################################################## PANDAS #####################################################################
 
 
 # Careful of the file name.
@@ -43,39 +43,11 @@ columnNames = ['sqft', 'rooms', 'price']
 data = pandas.read_csv(fileName) #data = pandas.read_csv(fileName, names=columnNames)
 
 
+# TODO: put Pandas loading here. 
+# TODO: put matplotlib functions here: one for y=x^2, one for housing data.
 
 
-# Your Pandas toolkit... https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html
-
-
-#print(type(data)) # returns <class 'pandas.core.frame.DataFrame'> because data is a DataFrame as defined in pandas.
-#print(data.shape) # returns a tuple of the dimensions. (10,3)
-
-#print(data.axes) # returns details of the row and column indices. Pandas fills in on the 'row' with integers. (You can see this with 'print(data)'.)
-#print(data.dtypes) # returns the data type of each column.
-print("Is dataframe empty: " + str(data.empty))
-#print(data.ndim) # Returns 2, the number of dimensions in this data frame... (rows, columns. Nothing else.)
-#print(data.notnull()) # Prints a True or False in place of every single element in the array, checking whether or not each element is NULL.
-
-# Print out only one column of a DataFrame. This prints out the 'price' column next to the pandas-assigned index.
-print(data.get('price'))
-
-# TODO - AWESOME!!! Makes a not very helpful plot.
-#data.plot(x=data['rooms'], y=data['price'], title = "Beaverton Houses by price and rooms")
-plt.show()
-
-
-
-
-
-
-
-####################################################  NEURAL NETWORK ##################################################################
-
-
-# Create a basic set of data on which to train the network. Assume: 1 input node, 2 hidden nodes, 1 output node. x^2.
-
-
+#########################################################  NEURAL NETWORK ##################################################################
 
 
 
@@ -237,20 +209,38 @@ class Neural_Network(object):
 
 def test1_xSquared():
     """
-    A neural network test on the equation y=x^2. NN is a 3-layer MLP with one input node, two hidden nodes, and three output nodes.
+    A neural network test on the equation y=x^2. 
+    NN is a 3-layer MLP with one input node, two hidden nodes, and three output nodes.
+
+    TODO: fix function calls, after you finish with the training functions' architecture....
 
     """
+    # Create a basic set of data on which to train the network. Assume: 1 input node, 2 hidden nodes, 1 output node. x^2.
     xSquaredPattern = [ [1, 2, 3, 4, 5], [1, 4, 9, 16, 25] ]
     print(xSquaredPattern)
     print(xSquaredPattern[0])
 
     net1 = Neural_Network(1,2,1)
     net1.train(xSquaredPattern) # Add more variables to this.
+
+    # Note: may not need a built-in predict function? Unsure. Probably will.
     net1.predict(7)
 
+def test2_housingPrices():
+    """
+    A neural network test on the housing prices in a specific location. 
+    NN is a 3-layer MLP with two input nodes, three hidden nodes, and one output node. 
+
+    TODO: Make sure to fix function calls, after you finish with the training functions' architecture....
+
+    """
+    #Insert pandas data loading here...
+
+    net2 = Neural_Network(2,3,1)
 
 
-
+# Call your test cases.
+test1_xSquared()
 
 
 
